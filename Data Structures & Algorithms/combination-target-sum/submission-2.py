@@ -1,0 +1,18 @@
+class Solution:
+    def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
+        self.res = []
+        def backtrack(combo,i,total):
+            if total > target:
+                return 
+            if total == target:
+                self.res.append(list(combo))
+                return
+            for n in range(i,len(nums)):
+                if total + nums[n] > target:
+                    break
+                combo.append(nums[n])
+                backtrack(combo, n, total + nums[n])
+                combo.pop()
+        nums.sort()
+        backtrack([],0,0)
+        return self.res
